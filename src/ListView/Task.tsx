@@ -1,7 +1,7 @@
 import { useRecoilValue } from 'recoil';
 
-import { taskStateById } from './atoms';
-import { TaskId } from './types';
+import { taskStateById } from 'atoms';
+import { TaskId } from 'types';
 
 type Props = {
   id: TaskId;

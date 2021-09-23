@@ -1,7 +1,7 @@
 import { useRecoilValue } from 'recoil';
 
 import { projectState } from 'atoms';
-import Task from 'Task';
+import Task from './Task';
 
 const ListView = () => {
   const { tasks } = useRecoilValue(projectState);

@@ -1,7 +1,7 @@
 import { useRecoilValue } from 'recoil';
 
 import ListView from './ListView/ListView';
-import TaskComponent from './Task';
+import TaskComponent from './ListView/Task';
 import { projectState } from './atoms';
 
 import './App.css';
