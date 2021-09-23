@@ -16,6 +16,7 @@ const NextPanel = () => {
         <>
           <h2>Next</h2>
           {firstTask.name}
+          <button>DONE!</button>
         </>
       )}
     </div>
