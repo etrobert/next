@@ -1,11 +1,2 @@
 .App {
 }
-
-.App__next-panel {
-  background-color: tan;
-  position: absolute;
-  bottom: 2rem;
-  right: 2rem;
-  width: 20rem;
-  height: 13rem;
-}
