@@ -10,7 +10,15 @@ type Props = {
 const Task = ({ id }: Props) => {
   const task = useRecoilValue(taskStateById(id));
 
-  return <div>{task.name}</div>;
+  return (
+    <tr>
+      <td>{task.name}</td>
+      <td>Ready</td>
+      <td>
+        <button>Done!</button>
+      </td>
+    </tr>
+  );
 };
 
 export default Task;
