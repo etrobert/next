@@ -8,16 +8,19 @@ import { projectState, taskStateById } from './atoms';
 
 import './index.css';
 
-const mockTask1 = {
-  name: 'task-1',
-};
+const mockTaskFactory = (n: number) => ({
+  name: `task-${n}`,
+});
+
+const mockTasks = [0, 1, 2, 3, 4, 5, 5].map(mockTaskFactory);
+const mockTasksIds = mockTasks.map((task) => task.name);
 
 ReactDOM.render(
   <React.StrictMode>
     <RecoilRoot
       initializeState={({ set }) => {
-        set(projectState, { tasks: ['task-1'] });
-        set(taskStateById('task-1'), mockTask1);
+        set(projectState, { tasks: mockTasksIds });
+        mockTasks.forEach((task) => set(taskStateById(task.name), task));
       }}
     >
       <App />
