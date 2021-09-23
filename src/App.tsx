@@ -1,5 +1,6 @@
 import { useRecoilValue } from 'recoil';
 
+import ListView from './ListView/ListView';
 import TaskComponent from './Task';
 import { projectState } from './atoms';
 
@@ -11,11 +12,7 @@ function App() {
   return (
     <div className="App">
       <h1>Next</h1>
-      <ul>
-        {tasks.map((task) => (
-          <TaskComponent key={task} id={task} />
-        ))}
-      </ul>
+      <ListView />
       <div className="App__next-panel">
         {tasks.length === 0 ? (
           <h2>You're done!</h2>
