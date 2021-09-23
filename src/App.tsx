@@ -1,28 +1,19 @@
-import { useState } from 'react';
+import { useRecoilValue } from 'recoil';
+
+import TaskComponent from './Task';
+import { projectState } from './atoms';
 
 import './App.css';
 
-type TaskId = string;
-
-type Task = {
-  id: TaskId;
-  name: string;
-};
-
-const mockTask1 = {
-  id: '1',
-  name: 'task-1',
-};
-
 function App() {
-  const [tasks, setTasks] = useState<Task[]>([mockTask1]);
+  const { tasks } = useRecoilValue(projectState);
 
   return (
     <div className="App">
       <h1>Next</h1>
       <ul>
         {tasks.map((task) => (
-          <li key={task.id}>{task.name}</li>
+          <TaskComponent key={task} id={task} />
         ))}
       </ul>
       <div className="App__next-panel">
@@ -31,7 +22,7 @@ function App() {
         ) : (
           <>
             <h2>Next</h2>
-            {tasks[0].name}
+            <TaskComponent id={tasks[0]} />
           </>
         )}
       </div>

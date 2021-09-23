@@ -1,12 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { RecoilRoot } from 'recoil';
+
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { projectState, taskStateById } from './atoms';
+
+import './index.css';
+
+const mockTask1 = {
+  name: 'task-1',
+};
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <RecoilRoot
+      initializeState={({ set }) => {
+        set(projectState, { tasks: ['task-1'] });
+        set(taskStateById('task-1'), mockTask1);
+      }}
+    >
+      <App />
+    </RecoilRoot>
   </React.StrictMode>,
   document.getElementById('root')
 );
