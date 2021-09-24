@@ -13,7 +13,7 @@ const NextPanel = () => {
         <h2>You're done!</h2>
       ) : (
         <>
-          <h2>Next</h2>
+          <h2>Next Task</h2>
           {nextTask.name}
           <button>DONE!</button>
         </>
