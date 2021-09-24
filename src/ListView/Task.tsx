@@ -2,6 +2,7 @@ import { useRecoilState } from 'recoil';
 
 import { taskStateById } from 'atoms';
 import { TaskId } from 'types';
+import useDeleteTask from 'useDeleteTask';
 
 import './Task.css';
 
@@ -11,6 +12,8 @@ type Props = {
 
 const Task = ({ id }: Props) => {
   const [{ name, status }, setTask] = useRecoilState(taskStateById(id));
+
+  const deleteTask = useDeleteTask();
 
   const toggleStatus = () => {
     setTask((task) => ({
@@ -29,6 +32,9 @@ const Task = ({ id }: Props) => {
         />
       </td>
       <td className={'Task__name-td'}>{name}</td>
+      <td>
+        <button onClick={() => deleteTask(id)}>Delete</button>
+      </td>
     </tr>
   );
 };
