@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { projectState } from 'atoms';
+import useAddTask from 'useAddTask';
 
 import Task from './Task';
 
@@ -11,13 +12,16 @@ const ListView = () => {
   const { tasks } = useRecoilValue(projectState);
   const [newTaskName, setNewTaskName] = useState<string>('');
 
+  const addTask = useAddTask();
+
   return (
     <>
       <form
         id="new-task-form"
         onSubmit={(e) => {
           e.preventDefault();
-          console.log(newTaskName);
+          addTask(newTaskName);
+          setNewTaskName('');
         }}
       />
       <table className="ListView">
