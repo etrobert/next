@@ -3,6 +3,8 @@ import { useRecoilValue } from 'recoil';
 import { taskStateById } from 'atoms';
 import { TaskId } from 'types';
 
+import './Task.css';
+
 type Props = {
   id: TaskId;
 };
@@ -12,11 +14,10 @@ const Task = ({ id }: Props) => {
 
   return (
     <tr>
-      <td>{task.name}</td>
-      <td>Ready</td>
       <td>
-        <button>Done!</button>
+        <input type="checkbox" />
       </td>
+      <td className={'Task__name-td'}>{task.name}</td>
     </tr>
   );
 };

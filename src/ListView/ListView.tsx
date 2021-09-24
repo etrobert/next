@@ -11,13 +11,6 @@ const ListView = () => {
 
   return (
     <table className="ListView">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Status</th>
-          <th>{/* Buttons */}</th>
-        </tr>
-      </thead>
       <tbody>
         {tasks.map((task) => (
           <Task key={task} id={task} />

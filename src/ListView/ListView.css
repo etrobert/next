@@ -3,17 +3,14 @@
   width: 100%;
 }
 
-.ListView td,
-.ListView th {
-  padding: 0.5em 0.75em;
-}
-
-.ListView th {
-  text-align: start;
-  background-color: #f9fafb;
+.ListView td {
+  padding: 1rem 1.5rem;
 }
 
 .ListView td {
-  border-top: 1px solid lightgray;
   border-bottom: 1px solid lightgray;
+}
+
+.ListView > tbody > *:last-child > td {
+  border-bottom: none;
 }
