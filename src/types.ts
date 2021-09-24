@@ -2,6 +2,7 @@ type TaskId = string;
 
 type Task = {
   name: string;
+  status: 'ready' | 'completed';
 };
 
 type Project = {

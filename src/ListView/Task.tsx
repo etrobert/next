@@ -1,4 +1,4 @@
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 
 import { taskStateById } from 'atoms';
 import { TaskId } from 'types';
@@ -10,14 +10,25 @@ type Props = {
 };
 
 const Task = ({ id }: Props) => {
-  const task = useRecoilValue(taskStateById(id));
+  const [{ name, status }, setTask] = useRecoilState(taskStateById(id));
+
+  const toggleStatus = () => {
+    setTask((task) => ({
+      ...task,
+      status: task.status === 'ready' ? 'completed' : 'ready',
+    }));
+  };
 
   return (
     <tr>
       <td>
-        <input type="checkbox" />
+        <input
+          type="checkbox"
+          checked={status === 'completed'}
+          onChange={toggleStatus}
+        />
       </td>
-      <td className={'Task__name-td'}>{task.name}</td>
+      <td className={'Task__name-td'}>{name}</td>
     </tr>
   );
 };

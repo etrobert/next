@@ -10,6 +10,7 @@ import './index.css';
 
 const mockTaskFactory = (n: number) => ({
   name: `task-${n}`,
+  status: Math.random() > 0.5 ? ('ready' as const) : ('completed' as const),
 });
 
 const mockTasks = [0, 1, 2, 3, 4, 5, 6].map(mockTaskFactory);
