@@ -12,7 +12,7 @@ const mockTaskFactory = (n: number) => ({
   name: `task-${n}`,
 });
 
-const mockTasks = [0, 1, 2, 3, 4, 5, 5].map(mockTaskFactory);
+const mockTasks = [0, 1, 2, 3, 4, 5, 6].map(mockTaskFactory);
 const mockTasksIds = mockTasks.map((task) => task.name);
 
 ReactDOM.render(
