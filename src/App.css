@@ -1,2 +1,7 @@
 .App {
+  padding: 1rem;
+}
+
+.App h1 {
+  font-size: 5rem;
 }
