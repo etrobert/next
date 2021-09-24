@@ -20,6 +20,7 @@ const ListView = () => {
         id="new-task-form"
         onSubmit={(e) => {
           e.preventDefault();
+          if (newTaskName === '') return;
           addTask(newTaskName);
           setNewTaskName('');
         }}
