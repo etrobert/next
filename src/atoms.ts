@@ -1,6 +1,6 @@
 import { atom, atomFamily, selector } from 'recoil';
 
-import { Project, Task, TaskId } from './types';
+import { Project, ProjectId, Task, TaskId } from './types';
 
 const taskStateById = atomFamily<Task, TaskId>({
   key: 'Task',
@@ -8,6 +8,11 @@ const taskStateById = atomFamily<Task, TaskId>({
     name: 'DEFAULT-NAME',
     status: 'ready',
   },
+});
+
+const projectIdState = atom<ProjectId>({
+  key: 'ProjectId',
+  default: 'AY61ltFwdgzx8AgBFqKC',
 });
 
 const projectState = atom<Project>({
@@ -27,4 +32,4 @@ const nextTaskIdState = selector<TaskId | null>({
   },
 });
 
-export { taskStateById, projectState, nextTaskIdState };
+export { taskStateById, projectIdState, projectState, nextTaskIdState };

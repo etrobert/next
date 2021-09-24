@@ -5,8 +5,10 @@ type Task = {
   status: 'ready' | 'completed';
 };
 
+type ProjectId = string;
+
 type Project = {
   tasks: TaskId[];
 };
 
-export type { TaskId, Task, Project };
+export type { TaskId, Task, ProjectId, Project };

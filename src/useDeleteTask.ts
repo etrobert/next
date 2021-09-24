@@ -1,15 +1,19 @@
-import { useRecoilCallback } from 'recoil';
-import without from 'lodash/without';
+import { useRecoilValue } from 'recoil';
 
-import { projectState } from './atoms';
+import { projectIdState } from './atoms';
 import { TaskId } from './types';
+import { useCallback } from 'react';
+import { deleteDoc, doc } from 'firebase/firestore';
+import firestore from 'firestore';
 
-const useDeleteTask = () =>
-  useRecoilCallback(({ set }) => (id: TaskId) => {
-    set(projectState, (project) => ({
-      ...project,
-      tasks: without(project.tasks, id),
-    }));
-  });
+const useDeleteTask = () => {
+  const projectId = useRecoilValue(projectIdState);
+
+  return useCallback(
+    (id: TaskId) =>
+      deleteDoc(doc(firestore, `projects/${projectId}/tasks/${id}`)),
+    [projectId]
+  );
+};
 
 export default useDeleteTask;

@@ -1,18 +1,25 @@
-import { useRecoilCallback } from 'recoil';
+import { addDoc, collection } from 'firebase/firestore';
+import { useCallback } from 'react';
+import { useRecoilValue } from 'recoil';
 
-import { projectState, taskStateById } from './atoms';
+import firestore from 'firestore';
 
-// TODO Replace
-const generateId = () => Math.random().toString();
+import { projectIdState } from './atoms';
 
-const useAddTask = () =>
-  useRecoilCallback(({ set }) => (name: string) => {
-    const newId = generateId();
-    set(taskStateById(newId), { name, status: 'ready' as const });
-    set(projectState, (state) => ({
-      ...state,
-      tasks: [...state.tasks, newId],
-    }));
-  });
+const useAddTask = () => {
+  const projectId = useRecoilValue(projectIdState);
+
+  return useCallback(
+    (name: string) => {
+      const ref = collection(firestore, `projects/${projectId}/tasks`);
+      const task = {
+        name,
+        status: 'ready',
+      };
+      return addDoc(ref, task);
+    },
+    [projectId]
+  );
+};
 
 export default useAddTask;
