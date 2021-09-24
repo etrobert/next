@@ -13,7 +13,7 @@ const NextPanel = () => {
   return (
     <div className="NextPanel">
       {nextTaskId === null ? (
-        <h2>You're done!</h2>
+        <h2 className="NextPanel__done">You're done!</h2>
       ) : (
         <>
           <h2>Next Task</h2>
