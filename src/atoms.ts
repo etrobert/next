@@ -27,12 +27,4 @@ const nextTaskIdState = selector<TaskId | null>({
   },
 });
 
-const nextTaskState = selector<Task | null>({
-  key: 'NextTask',
-  get: ({ get }) => {
-    const nextTaskId = get(nextTaskIdState);
-    return nextTaskId === null ? null : get(taskStateById(nextTaskId));
-  },
-});
-
-export { taskStateById, projectState, nextTaskState };
+export { taskStateById, projectState, nextTaskIdState };

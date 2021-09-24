@@ -1,21 +1,30 @@
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
-import { nextTaskState } from 'atoms';
+import { nextTaskIdState, taskStateById } from 'atoms';
 
 import './NextPanel.css';
 
 const NextPanel = () => {
-  const nextTask = useRecoilValue(nextTaskState);
+  const nextTaskId = useRecoilValue(nextTaskIdState);
+  const [nextTask, setNextTask] = useRecoilState(
+    taskStateById(nextTaskId ?? '')
+  );
 
   return (
     <div className="NextPanel">
-      {nextTask === null ? (
+      {nextTaskId === null ? (
         <h2>You're done!</h2>
       ) : (
         <>
           <h2>Next Task</h2>
           {nextTask.name}
-          <button>DONE!</button>
+          <button
+            onClick={() =>
+              setNextTask((task) => ({ ...task, status: 'completed' }))
+            }
+          >
+            DONE!
+          </button>
         </>
       )}
     </div>
