@@ -1,0 +1,26 @@
+.LandingPage {
+  display: grid;
+  place-content: center;
+  height: 100%;
+}
+
+.LandingPage__title {
+  font-size: 10rem;
+}
+
+.LandingPage__cta {
+  height: 5rem;
+
+  display: grid;
+  place-content: center;
+
+  text-decoration: none;
+
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  background-color: black;
+  border: none;
+  cursor: pointer;
+  border-radius: 0.5rem;
+}

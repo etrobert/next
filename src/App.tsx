@@ -1,18 +1,22 @@
-import ListView from './ListView/ListView';
-import NextPanel from './NextPanel/NextPanel';
-import useSyncFirestore from './useSyncFirestore';
+import { Switch, BrowserRouter as Router, Route } from 'react-router-dom';
+
+import LandingPage from './LandingPage/LandingPage';
+import MainPage from './MainPage/MainPage';
 
 import './App.css';
 
 function App() {
-  useSyncFirestore();
-
   return (
-    <div className="App">
-      <h1>Next</h1>
-      <ListView />
-      <NextPanel />
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <LandingPage />
+        </Route>
+        <Route path="/project/:projectId">
+          <MainPage />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
