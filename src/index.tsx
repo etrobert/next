@@ -4,26 +4,12 @@ import { RecoilRoot } from 'recoil';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { projectState, taskStateById } from './atoms';
 
 import './index.css';
 
-const mockTaskFactory = (n: number) => ({
-  name: `task-${n}`,
-  status: Math.random() > 0.5 ? ('ready' as const) : ('completed' as const),
-});
-
-const mockTasks = [0, 1, 2, 3, 4, 5, 6].map(mockTaskFactory);
-const mockTasksIds = mockTasks.map((task) => task.name);
-
 ReactDOM.render(
   <React.StrictMode>
-    <RecoilRoot
-      initializeState={({ set }) => {
-        set(projectState, { tasks: mockTasksIds });
-        mockTasks.forEach((task) => set(taskStateById(task.name), task));
-      }}
-    >
+    <RecoilRoot>
       <App />
     </RecoilRoot>
   </React.StrictMode>,
