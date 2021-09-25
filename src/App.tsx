@@ -7,7 +7,7 @@ import './App.css';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/next">
       <Switch>
         <Route exact path="/">
           <LandingPage />
