@@ -1,18 +1,28 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
+import useAddProject from 'useAddProject';
 
 import './LandingPage.css';
 
 const LandingPage = () => {
-  const [newProjectId] = useState(uuidv4());
+  const addProject = useAddProject();
+
+  const [creatingProject, setCreatingProject] = useState(false);
+
+  const onCtaClick = async () => {
+    setCreatingProject(true);
+    const ref = await addProject();
+    window.location.href = `/next/project/${ref.id}`;
+  };
 
   return (
     <div className="LandingPage">
       <h1 className="LandingPage__title">Next</h1>
-      <Link className={'LandingPage__cta'} to={`/project/${newProjectId}`}>
-        START NOW
-      </Link>
+      <button
+        className={'LandingPage__cta'}
+        onClick={creatingProject ? undefined : onCtaClick}
+      >
+        {creatingProject ? 'Creating Project...' : 'START NOW'}
+      </button>
     </div>
   );
 };
