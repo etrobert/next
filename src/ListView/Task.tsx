@@ -1,8 +1,9 @@
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 
 import { taskStateById } from 'atoms';
 import { TaskId } from 'types';
 import useDeleteTask from 'useDeleteTask';
+import useUpdateTask from 'useUpdateTask';
 
 import './Task.css';
 
@@ -11,16 +12,14 @@ type Props = {
 };
 
 const Task = ({ id }: Props) => {
-  const [{ name, status }, setTask] = useRecoilState(taskStateById(id));
+  const { name, status } = useRecoilValue(taskStateById(id));
 
   const deleteTask = useDeleteTask();
+  const updateTask = useUpdateTask();
 
-  const toggleStatus = () => {
-    setTask((task) => ({
-      ...task,
-      status: task.status === 'ready' ? 'completed' : 'ready',
-    }));
-  };
+  // TODO Use updater rather than local value
+  const toggleStatus = () =>
+    updateTask(id, { status: status === 'ready' ? 'completed' : 'ready' });
 
   return (
     <tr>

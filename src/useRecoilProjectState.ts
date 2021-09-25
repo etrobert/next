@@ -22,7 +22,13 @@ const useRecoilProjectState = () => {
         }))
   );
 
-  return { addTask, removeTask };
+  const setTask = useRecoilCallback(
+    ({ set }) =>
+      (id: TaskId, task: Task) =>
+        set(taskStateById(id), task)
+  );
+
+  return { addTask, setTask, removeTask };
 };
 
 export default useRecoilProjectState;

@@ -9,7 +9,7 @@ import { Task } from './types';
 
 const useSyncFirestore = (): void => {
   const projectId = useRecoilValue(projectIdState);
-  const { addTask, removeTask } = useRecoilProjectState();
+  const { addTask, setTask, removeTask } = useRecoilProjectState();
 
   useEffect(() => {
     const ref = collection(firestore, `projects/${projectId}/tasks`);
@@ -22,8 +22,7 @@ const useSyncFirestore = (): void => {
             addTask(id, task);
             break;
           case 'modified':
-            console.log('setTask', id, task);
-            // setTask(id, task);
+            setTask(id, task);
             break;
           case 'removed':
             removeTask(id);
@@ -32,7 +31,7 @@ const useSyncFirestore = (): void => {
       })
     );
     return unsubscribe;
-  }, [projectId, addTask, removeTask]);
+  }, [projectId, addTask, removeTask, setTask]);
 };
 
 export default useSyncFirestore;
