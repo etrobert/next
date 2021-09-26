@@ -7,11 +7,11 @@
   padding: 1rem 1.5rem;
 }
 
-.ListView td {
+.ListView tr {
   border-bottom: 1px solid lightgray;
 }
 
-.ListView > tbody > *:last-child > td {
+.ListView > tbody > tr:last-child {
   border-bottom: none;
 }
 
