@@ -1,4 +1,4 @@
-import { atom, atomFamily, selector } from 'recoil';
+import { atom, atomFamily, selector, selectorFamily } from 'recoil';
 
 import type {
   DependencyId,
@@ -37,14 +37,30 @@ const projectState = atom<Project>({
   default: { tasks: [], dependencies: [] },
 });
 
+const hasTaskPredecessorStateById = selectorFamily<boolean, TaskId>({
+  key: 'HasTaskPredecessor',
+  get:
+    (taskId) =>
+    ({ get }) => {
+      const { dependencies } = get(projectState);
+      return dependencies.some((depId) => {
+        const { successor } = get(dependencyStateById(depId));
+        return successor === taskId;
+      });
+    },
+});
+
 const nextTaskIdState = selector<TaskId | null>({
   key: 'NextTaskId',
   get: ({ get }) => {
     const { tasks } = get(projectState);
     return (
-      tasks.filter(
-        (taskId) => get(taskStateById(taskId)).status !== 'completed'
-      )[0] ?? null
+      tasks.filter((taskId) => {
+        return (
+          !get(hasTaskPredecessorStateById(taskId)) &&
+          get(taskStateById(taskId)).status === 'ready'
+        );
+      })[0] ?? null
     );
   },
 });
