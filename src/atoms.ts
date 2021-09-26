@@ -1,4 +1,5 @@
 import { atom, atomFamily, selector, selectorFamily } from 'recoil';
+import partition from 'lodash/partition';
 
 import type {
   DependencyId,
@@ -37,6 +38,27 @@ const projectState = atom<Project>({
   default: { tasks: [], dependencies: [] },
 });
 
+const projectWithoutCompletedState = selector<Project>({
+  key: 'ProjectWithoutCompleted',
+  get: ({ get }) => {
+    const { tasks, dependencies } = get(projectState);
+    const [completed, nonCompleted] = partition(
+      tasks,
+      (task) => get(taskStateById(task)).status === 'completed'
+    );
+
+    const deps = dependencies.filter((dep) => {
+      const { predecessor, successor } = get(dependencyStateById(dep));
+      // We filter out deps that have successor or predecessor completed
+      return !completed.some(
+        (task) => task === successor || task === predecessor
+      );
+    });
+
+    return { tasks: nonCompleted, dependencies: deps };
+  },
+});
+
 const hasTaskPredecessorStateById = selectorFamily<boolean, TaskId>({
   key: 'HasTaskPredecessor',
   get:
@@ -68,7 +90,7 @@ const nextTaskIdState = selector<TaskId | null>({
 const cytoscapeDataState = selector<Cy.ElementDefinition[]>({
   key: 'CytoscapeData',
   get: ({ get }) => {
-    const { tasks, dependencies } = get(projectState);
+    const { tasks, dependencies } = get(projectWithoutCompletedState);
     const tasksData = tasks.map((id) => {
       const { name } = get(taskStateById(id));
       return { data: { id, name } };
