@@ -3,8 +3,8 @@ import { useParams } from 'react-router';
 import { useSetRecoilState } from 'recoil';
 
 import { projectIdState } from 'atoms';
-import useSyncFirestore from 'useSyncFirestore';
-import useClearProjectOnNewId from 'useClearProjectOnNewId';
+import useSyncFirestore from 'hooks/useSyncFirestore';
+import useClearProjectOnNewId from 'hooks/useClearProjectOnNewId';
 
 import ListView from '../ListView/ListView';
 import NextPanel from '../NextPanel/NextPanel';

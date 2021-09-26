@@ -4,8 +4,8 @@ import { useRecoilValue } from 'recoil';
 
 import firestore from 'firestore';
 
-import { projectIdState } from './atoms';
-import { Task, TaskId } from './types';
+import { projectIdState } from 'atoms';
+import { Task, TaskId } from 'types';
 
 const useUpdateTask = () => {
   const projectId = useRecoilValue(projectIdState);

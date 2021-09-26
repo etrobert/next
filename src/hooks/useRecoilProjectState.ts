@@ -1,8 +1,8 @@
 import { without } from 'lodash';
 import { useRecoilCallback } from 'recoil';
 
-import { projectState, taskStateById } from './atoms';
-import { Task, TaskId } from './types';
+import { projectState, taskStateById } from 'atoms';
+import { Task, TaskId } from 'types';
 
 const useRecoilProjectState = () => {
   const addTask = useRecoilCallback(({ set }) => (id: TaskId, task: Task) => {

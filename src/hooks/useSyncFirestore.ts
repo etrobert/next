@@ -3,9 +3,9 @@ import { collection, onSnapshot } from 'firebase/firestore';
 import { useRecoilValue } from 'recoil';
 
 import useRecoilProjectState from './useRecoilProjectState';
-import { projectIdState } from './atoms';
-import firestore from './firestore';
-import { Task } from './types';
+import { projectIdState } from 'atoms';
+import firestore from 'firestore';
+import { Task } from 'types';
 
 const useSyncFirestore = (): void => {
   const projectId = useRecoilValue(projectIdState);

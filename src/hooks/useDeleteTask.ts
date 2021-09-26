@@ -1,9 +1,9 @@
-import { useRecoilValue } from 'recoil';
-
-import { projectIdState } from './atoms';
-import { TaskId } from './types';
 import { useCallback } from 'react';
+import { useRecoilValue } from 'recoil';
 import { deleteDoc, doc } from 'firebase/firestore';
+
+import { projectIdState } from 'atoms';
+import { TaskId } from 'types';
 import firestore from 'firestore';
 
 const useDeleteTask = () => {

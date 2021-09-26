@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import useAddProject from 'useAddProject';
+
+import useAddProject from 'hooks/useAddProject';
 
 import './LandingPage.css';
 
