@@ -2,6 +2,8 @@ import { atom, atomFamily, selector } from 'recoil';
 
 import { Project, ProjectId, Task, TaskId } from './types';
 
+import type Cy from 'cytoscape';
+
 const taskStateById = atomFamily<Task, TaskId>({
   key: 'Task',
   default: {
@@ -32,4 +34,21 @@ const nextTaskIdState = selector<TaskId | null>({
   },
 });
 
-export { taskStateById, projectIdState, projectState, nextTaskIdState };
+const cytoscapeDataState = selector<Cy.ElementDefinition[]>({
+  key: 'CytoscapeData',
+  get: ({ get }) => {
+    const { tasks } = get(projectState);
+    return tasks.map((id) => {
+      const { name } = get(taskStateById(id));
+      return { data: { id, name } };
+    });
+  },
+});
+
+export {
+  taskStateById,
+  projectIdState,
+  projectState,
+  nextTaskIdState,
+  cytoscapeDataState,
+};

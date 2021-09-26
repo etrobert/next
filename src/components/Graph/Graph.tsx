@@ -1,7 +1,7 @@
 import { useRecoilValue } from 'recoil';
 import CytoscapeComponent from 'react-cytoscapejs';
 
-import { projectState } from 'atoms';
+import { cytoscapeDataState } from 'atoms';
 
 import './Graph.css';
 
@@ -35,12 +35,8 @@ const cytoscapeStylesheet = [
  * Interactive canvas displaying a Task Graph
  */
 const Graph = (): JSX.Element => {
-  const { tasks } = useRecoilValue(projectState);
+  const data = useRecoilValue(cytoscapeDataState);
   // const dependencies = useRecoilValue(projectDependenciesSelector);
-
-  const cyTaskData = tasks.map((task) => ({
-    data: { id: task, name: task },
-  }));
 
   // const cyDependencyData = dependencies.map((dependency) => ({
   // data: {
@@ -54,7 +50,7 @@ const Graph = (): JSX.Element => {
     <div className="Graph">
       <CytoscapeComponent
         className="Graph__cytoscape"
-        elements={cyTaskData}
+        elements={data}
         stylesheet={cytoscapeStylesheet}
       />
     </div>
