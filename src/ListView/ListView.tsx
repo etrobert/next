@@ -37,6 +37,7 @@ const ListView = () => {
                 icon="plus-square"
                 type="submit"
                 form="new-task-form"
+                aria-label="Create"
               />
             </td>
             <td>

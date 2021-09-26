@@ -4,6 +4,7 @@ import feather from 'feather-icons';
 import './IconButton.css';
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
+  'aria-label': string;
   icon: string;
 };
 

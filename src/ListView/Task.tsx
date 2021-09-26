@@ -33,7 +33,11 @@ const Task = ({ id }: Props) => {
       </td>
       <td className={'Task__name-td'}>{name}</td>
       <td>
-        <IconButton icon={'x-square'} onClick={() => deleteTask(id)} />
+        <IconButton
+          icon={'x-square'}
+          aria-label={'Delete'}
+          onClick={() => deleteTask(id)}
+        />
       </td>
     </tr>
   );
