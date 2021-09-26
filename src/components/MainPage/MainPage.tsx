@@ -5,9 +5,8 @@ import { useSetRecoilState } from 'recoil';
 import { projectIdState } from 'atoms';
 import useSyncFirestore from 'hooks/useSyncFirestore';
 import useClearProjectOnNewId from 'hooks/useClearProjectOnNewId';
-
-import ListView from '../ListView/ListView';
-import NextPanel from '../NextPanel/NextPanel';
+import ListView from 'components/ListView/ListView';
+import NextPanel from 'components/NextPanel/NextPanel';
 
 import './MainPage.css';
 

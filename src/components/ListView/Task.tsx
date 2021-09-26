@@ -4,7 +4,7 @@ import { taskStateById } from 'atoms';
 import { TaskId } from 'types';
 import useDeleteTask from 'hooks/useDeleteTask';
 import useUpdateTask from 'hooks/useUpdateTask';
-import IconButton from 'IconButton/IconButton';
+import IconButton from 'components/IconButton/IconButton';
 
 import './Task.css';
 

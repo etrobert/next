@@ -1,7 +1,7 @@
 import { Switch, BrowserRouter as Router, Route } from 'react-router-dom';
 
-import LandingPage from './LandingPage/LandingPage';
-import MainPage from './MainPage/MainPage';
+import LandingPage from 'components/LandingPage/LandingPage';
+import MainPage from 'components/MainPage/MainPage';
 
 import './App.css';
 

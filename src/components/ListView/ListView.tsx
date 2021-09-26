@@ -3,9 +3,9 @@ import { useRecoilValue } from 'recoil';
 
 import { projectState } from 'atoms';
 import useAddTask from 'hooks/useAddTask';
+import IconButton from 'components/IconButton/IconButton';
 
 import Task from './Task';
-import IconButton from 'IconButton/IconButton';
 
 import './ListView.css';
 
