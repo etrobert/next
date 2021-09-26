@@ -2,10 +2,23 @@
   display: grid;
   place-content: center;
   height: 100%;
+
+  /* position: relative; */
+
+  /* gap: 1rem; */
 }
 
 .LandingPage__title {
   font-size: 10rem;
+  /* line-height: 0.6em; */
+}
+
+.LandingPage__tagline {
+  /* position: absolute; */
+  justify-self: center;
+  font-size: 1.3rem;
+  /* transform: translateX(190px) rotate(90deg) translateX(520px); */
+  margin-top: 0.2rem;
 }
 
 .LandingPage__cta {

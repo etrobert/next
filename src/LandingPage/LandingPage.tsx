@@ -23,6 +23,7 @@ const LandingPage = () => {
       >
         {creatingProject ? 'Creating Project...' : 'START NOW'}
       </button>
+      <p className="LandingPage__tagline">Your time, optimized.</p>
     </div>
   );
 };
