@@ -3,6 +3,7 @@ import { useRecoilValue } from 'recoil';
 import CytoscapeComponent from 'react-cytoscapejs';
 
 import { cytoscapeDataState } from 'atoms';
+import useAddDependency from 'hooks/useAddDependency';
 
 import './Graph.css';
 
@@ -43,15 +44,6 @@ const Graph = (): JSX.Element => {
   const [cy, setCy] = useState<Cy.Core | null>(null);
 
   const data = useRecoilValue(cytoscapeDataState);
-  // const dependencies = useRecoilValue(projectDependenciesSelector);
-
-  // const cyDependencyData = dependencies.map((dependency) => ({
-  // data: {
-  // source: dependency.predecessor,
-  // target: dependency.successor,
-  // },
-  // }));
-  // const cyDependencyData = [];
 
   useEffect(() => {
     if (cy === null) return;
@@ -75,6 +67,8 @@ const Graph = (): JSX.Element => {
     return () => eh.destroy();
   }, [cy]);
 
+  const addDependency = useAddDependency();
+
   // Setup cytoscape edgehandles onComplete event
   useEffect(() => {
     if (cy === null) return;
@@ -84,9 +78,8 @@ const Graph = (): JSX.Element => {
       sourceNode: Cy.NodeSingular,
       targetNode: Cy.NodeSingular,
       addedEdge: Cy.EdgeSingular
-    ) => {
-      console.log(`New edge between ${sourceNode.id()} and ${targetNode.id()}`);
-    };
+    ) => addDependency(sourceNode.id(), targetNode.id());
+
     // @ts-expect-error Typing is wrong
     cy.on('ehcomplete', handler);
 
@@ -94,7 +87,7 @@ const Graph = (): JSX.Element => {
       // @ts-expect-error Typing is wrong
       cy.removeListener(handler);
     };
-  }, [cy]);
+  }, [addDependency, cy]);
 
   return (
     <div className="Graph">

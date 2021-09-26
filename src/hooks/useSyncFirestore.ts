@@ -5,11 +5,12 @@ import { useRecoilValue } from 'recoil';
 import useRecoilProjectState from './useRecoilProjectState';
 import { projectIdState } from 'atoms';
 import firestore from 'firestore';
-import { Task } from 'types';
+import { Dependency, Task } from 'types';
 
 const useSyncFirestore = (): void => {
   const projectId = useRecoilValue(projectIdState);
-  const { addTask, setTask, removeTask } = useRecoilProjectState();
+  const { addTask, setTask, removeTask, addDependency } =
+    useRecoilProjectState();
 
   useEffect(() => {
     const ref = collection(firestore, `projects/${projectId}/tasks`);
@@ -32,6 +33,28 @@ const useSyncFirestore = (): void => {
     );
     return unsubscribe;
   }, [projectId, addTask, removeTask, setTask]);
+
+  useEffect(() => {
+    const ref = collection(firestore, `projects/${projectId}/dependencies`);
+    const unsubscribe = onSnapshot(ref, (snapshot) =>
+      snapshot.docChanges().forEach((change) => {
+        const { id } = change.doc;
+        const dependency = change.doc.data() as Dependency;
+        switch (change.type) {
+          case 'added':
+            addDependency(id, dependency);
+            break;
+          case 'modified':
+            // setTask(id, task);
+            break;
+          case 'removed':
+            // removeTask(id);
+            break;
+        }
+      })
+    );
+    return unsubscribe;
+  }, [projectId, addDependency]);
 };
 
 export default useSyncFirestore;

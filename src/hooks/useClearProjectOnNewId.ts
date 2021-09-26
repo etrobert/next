@@ -5,7 +5,7 @@ import { projectState } from 'atoms';
 
 const useClearProjectOnNewId = () => {
   const setProject = useSetRecoilState(projectState);
-  useEffect(() => setProject({ tasks: [] }));
+  useEffect(() => setProject({ tasks: [], dependencies: [] }));
 };
 
 export default useClearProjectOnNewId;

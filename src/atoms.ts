@@ -1,6 +1,13 @@
 import { atom, atomFamily, selector } from 'recoil';
 
-import { Project, ProjectId, Task, TaskId } from './types';
+import type {
+  DependencyId,
+  Dependency,
+  Project,
+  ProjectId,
+  Task,
+  TaskId,
+} from './types';
 
 import type Cy from 'cytoscape';
 
@@ -12,6 +19,14 @@ const taskStateById = atomFamily<Task, TaskId>({
   },
 });
 
+const dependencyStateById = atomFamily<Dependency, DependencyId>({
+  key: 'Dependency',
+  default: {
+    predecessor: 'DEFAULT-ID',
+    successor: 'DEFAULT-ID',
+  },
+});
+
 const projectIdState = atom<ProjectId>({
   key: 'ProjectId',
   default: 'AY61ltFwdgzx8AgBFqKC',
@@ -19,7 +34,7 @@ const projectIdState = atom<ProjectId>({
 
 const projectState = atom<Project>({
   key: 'Project',
-  default: { tasks: [] },
+  default: { tasks: [], dependencies: [] },
 });
 
 const nextTaskIdState = selector<TaskId | null>({
@@ -37,16 +52,26 @@ const nextTaskIdState = selector<TaskId | null>({
 const cytoscapeDataState = selector<Cy.ElementDefinition[]>({
   key: 'CytoscapeData',
   get: ({ get }) => {
-    const { tasks } = get(projectState);
-    return tasks.map((id) => {
+    const { tasks, dependencies } = get(projectState);
+    const tasksData = tasks.map((id) => {
       const { name } = get(taskStateById(id));
       return { data: { id, name } };
     });
+
+    const dependenciesData = dependencies.map((id) => {
+      const { predecessor: source, successor: target } = get(
+        dependencyStateById(id)
+      );
+      return { data: { id, source, target } };
+    });
+
+    return [...tasksData, ...dependenciesData];
   },
 });
 
 export {
   taskStateById,
+  dependencyStateById,
   projectIdState,
   projectState,
   nextTaskIdState,
