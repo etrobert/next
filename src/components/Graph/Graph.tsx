@@ -45,12 +45,14 @@ const Graph = (): JSX.Element => {
 
   const data = useRecoilValue(cytoscapeDataState);
 
+  // Apply layout on data change
   useEffect(() => {
     if (cy === null) return;
-    const layout = cy.layout({
-      name: 'random',
+    const options = {
+      name: 'cola',
       animate: true,
-    });
+    };
+    const layout = cy.layout(options);
     layout.run();
     return () => {
       layout.stop();
