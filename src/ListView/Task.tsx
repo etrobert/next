@@ -35,7 +35,7 @@ const Task = ({ id }: Props) => {
       <td>
         <IconButton
           icon={'x-square'}
-          aria-label={'Delete'}
+          title={'Delete'}
           onClick={() => deleteTask(id)}
         />
       </td>
