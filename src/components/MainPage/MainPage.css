@@ -1,6 +1,6 @@
 .MainPage {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(40rem, 1fr) 2fr;
   height: 100%;
 }
 
