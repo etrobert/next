@@ -85,7 +85,7 @@ const Graph = (): JSX.Element => {
 
     return () => {
       // @ts-expect-error Typing is wrong
-      cy.removeListener(handler);
+      cy.removeListener('ehcomplete', handler);
     };
   }, [addDependency, cy]);
 
