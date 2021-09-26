@@ -9,7 +9,7 @@ import { Dependency, Task } from 'types';
 
 const useSyncFirestore = (): void => {
   const projectId = useRecoilValue(projectIdState);
-  const { addTask, setTask, removeTask, addDependency } =
+  const { addTask, setTask, removeTask, addDependency, removeDependency } =
     useRecoilProjectState();
 
   useEffect(() => {
@@ -48,13 +48,13 @@ const useSyncFirestore = (): void => {
             // setTask(id, task);
             break;
           case 'removed':
-            // removeTask(id);
+            removeDependency(id);
             break;
         }
       })
     );
     return unsubscribe;
-  }, [projectId, addDependency]);
+  }, [projectId, addDependency, removeDependency]);
 };
 
 export default useSyncFirestore;

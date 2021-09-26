@@ -39,7 +39,16 @@ const useRecoilProjectState = () => {
       }
   );
 
-  return { addTask, setTask, removeTask, addDependency };
+  const removeDependency = useRecoilCallback(
+    ({ set }) =>
+      (id: DependencyId) =>
+        set(projectState, (project) => ({
+          ...project,
+          dependencies: without(project.dependencies, id),
+        }))
+  );
+
+  return { addTask, setTask, removeTask, addDependency, removeDependency };
 };
 
 export default useRecoilProjectState;
