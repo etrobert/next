@@ -5,6 +5,7 @@ import { projectState } from 'atoms';
 import useAddTask from 'useAddTask';
 
 import Task from './Task';
+import IconButton from 'IconButton/IconButton';
 
 import './ListView.css';
 
@@ -32,8 +33,8 @@ const ListView = () => {
           ))}
           <tr>
             <td>
-              <button
-                className="ListView__new-task-submit"
+              <IconButton
+                icon="plus-square"
                 type="submit"
                 form="new-task-form"
               />
