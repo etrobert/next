@@ -1,7 +1,13 @@
 .MainPage {
-  padding: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100%;
 }
 
 .MainPage__title {
   font-size: 5rem;
+}
+
+.MainPage__left-pane {
+  padding: 1rem;
 }

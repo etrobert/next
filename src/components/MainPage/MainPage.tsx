@@ -7,6 +7,7 @@ import useSyncFirestore from 'hooks/useSyncFirestore';
 import useClearProjectOnNewId from 'hooks/useClearProjectOnNewId';
 import ListView from 'components/ListView/ListView';
 import NextPanel from 'components/NextPanel/NextPanel';
+import Graph from 'components/Graph/Graph';
 
 import './MainPage.css';
 
@@ -22,8 +23,11 @@ const MainPage = () => {
 
   return (
     <div className="MainPage">
-      <h1 className="MainPage__title">Next</h1>
-      <ListView />
+      <div className="MainPage__left-pane">
+        <h1 className="MainPage__title">Next</h1>
+        <ListView />
+      </div>
+      <Graph />
       <NextPanel />
     </div>
   );
