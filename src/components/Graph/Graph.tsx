@@ -10,7 +10,9 @@ import type Cy from 'cytoscape';
 
 const cytoscapeStylesheet = [
   {
-    selector: 'node',
+    // [name] restricts the styling to elements with a name property
+    // This is useful because edgehandles creates ghost nodes
+    selector: 'node[name]',
     style: {
       // TODO Replace: label is deprecated
       // Source https://github.com/cytoscape/cytoscape.js/issues/2713#issuecomment-712247855
@@ -62,6 +64,37 @@ const Graph = (): JSX.Element => {
       layout.stop();
     };
   }, [cy, data]);
+
+  // Configure cytoscape edgehandles
+  useEffect(() => {
+    if (cy === null) return;
+
+    const eh = cy.edgehandles({ snap: false, hoverDelay: 0 });
+    eh.enableDrawMode();
+
+    return () => eh.destroy();
+  }, [cy]);
+
+  // Setup cytoscape edgehandles onComplete event
+  useEffect(() => {
+    if (cy === null) return;
+
+    const handler = (
+      event: Cy.EventObject,
+      sourceNode: Cy.NodeSingular,
+      targetNode: Cy.NodeSingular,
+      addedEdge: Cy.EdgeSingular
+    ) => {
+      console.log(`New edge between ${sourceNode.id()} and ${targetNode.id()}`);
+    };
+    // @ts-expect-error Typing is wrong
+    cy.on('ehcomplete', handler);
+
+    return () => {
+      // @ts-expect-error Typing is wrong
+      cy.removeListener(handler);
+    };
+  }, [cy]);
 
   return (
     <div className="Graph">

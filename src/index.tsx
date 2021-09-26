@@ -5,6 +5,7 @@ import { RecoilRoot } from 'recoil';
 import App from 'components/App/App';
 
 import reportWebVitals from './reportWebVitals';
+import './cytoscapeSetup';
 
 import './index.css';
 
