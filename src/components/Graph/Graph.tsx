@@ -1,9 +1,12 @@
+import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import CytoscapeComponent from 'react-cytoscapejs';
 
 import { cytoscapeDataState } from 'atoms';
 
 import './Graph.css';
+
+import type Cy from 'cytoscape';
 
 const cytoscapeStylesheet = [
   {
@@ -35,6 +38,8 @@ const cytoscapeStylesheet = [
  * Interactive canvas displaying a Task Graph
  */
 const Graph = (): JSX.Element => {
+  const [cy, setCy] = useState<Cy.Core | null>(null);
+
   const data = useRecoilValue(cytoscapeDataState);
   // const dependencies = useRecoilValue(projectDependenciesSelector);
 
@@ -46,12 +51,25 @@ const Graph = (): JSX.Element => {
   // }));
   // const cyDependencyData = [];
 
+  useEffect(() => {
+    if (cy === null) return;
+    const layout = cy.layout({
+      name: 'random',
+      animate: true,
+    });
+    layout.run();
+    return () => {
+      layout.stop();
+    };
+  }, [cy, data]);
+
   return (
     <div className="Graph">
       <CytoscapeComponent
         className="Graph__cytoscape"
         elements={data}
         stylesheet={cytoscapeStylesheet}
+        cy={(cy) => setCy(cy)}
       />
     </div>
   );
