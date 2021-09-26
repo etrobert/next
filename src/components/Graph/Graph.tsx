@@ -4,6 +4,7 @@ import CytoscapeComponent from 'react-cytoscapejs';
 
 import { cytoscapeDataState } from 'atoms';
 import useAddDependency from 'hooks/useAddDependency';
+import useCytoscapeEvent from 'hooks/useCytoscapeEvent';
 
 import './Graph.css';
 
@@ -71,25 +72,15 @@ const Graph = (): JSX.Element => {
 
   const addDependency = useAddDependency();
 
-  // Setup cytoscape edgehandles onComplete event
-  useEffect(() => {
-    if (cy === null) return;
+  const handler = (
+    event: Cy.EventObject,
+    sourceNode: Cy.NodeSingular,
+    targetNode: Cy.NodeSingular,
+    addedEdge: Cy.EdgeSingular
+  ) => addDependency(sourceNode.id(), targetNode.id());
 
-    const handler = (
-      event: Cy.EventObject,
-      sourceNode: Cy.NodeSingular,
-      targetNode: Cy.NodeSingular,
-      addedEdge: Cy.EdgeSingular
-    ) => addDependency(sourceNode.id(), targetNode.id());
-
-    // @ts-expect-error Typing is wrong
-    cy.on('ehcomplete', handler);
-
-    return () => {
-      // @ts-expect-error Typing is wrong
-      cy.removeListener('ehcomplete', handler);
-    };
-  }, [addDependency, cy]);
+  //@ts-expect-error Typing is wrong
+  useCytoscapeEvent(cy, 'ehcomplete', handler);
 
   return (
     <div className="Graph">
