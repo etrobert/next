@@ -77,7 +77,10 @@ const Graph = (): JSX.Element => {
     sourceNode: Cy.NodeSingular,
     targetNode: Cy.NodeSingular,
     addedEdge: Cy.EdgeSingular
-  ) => addDependency(sourceNode.id(), targetNode.id());
+  ) => {
+    cy?.remove(addedEdge);
+    addDependency(sourceNode.id(), targetNode.id());
+  };
 
   //@ts-expect-error Typing is wrong
   useCytoscapeEvent(cy, 'ehcomplete', handler);
