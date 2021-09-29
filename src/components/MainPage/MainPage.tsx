@@ -24,7 +24,7 @@ const MainPage = () => {
   return (
     <div className="MainPage">
       <div className="MainPage__left-pane">
-        <h1 className="MainPage__title">Next</h1>
+        <h1 className="MainPage__title">[next]</h1>
         <ListView />
       </div>
       <Graph />

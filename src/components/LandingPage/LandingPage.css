@@ -1,7 +1,9 @@
 .LandingPage {
   display: grid;
   place-content: center;
+  justify-items: center;
   height: 100%;
+  gap: 1.5rem;
 }
 
 .LandingPage__title {
@@ -9,7 +11,7 @@
 }
 
 .LandingPage__cta {
-  height: 5rem;
+  padding: 1.5rem 3rem;
 
   display: grid;
   place-content: center;

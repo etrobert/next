@@ -17,7 +17,7 @@ const LandingPage = () => {
 
   return (
     <div className="LandingPage">
-      <h1 className="LandingPage__title">Next</h1>
+      <h1 className="LandingPage__title">[next]</h1>
       <button
         className={'LandingPage__cta'}
         onClick={creatingProject ? undefined : onCtaClick}
